@@ -1,0 +1,54 @@
+doctype html
+html
+  head
+    title Antonin Cezard
+    meta(charset='utf-8')
+    meta(content='text/html; charset=utf-8', http-equiv='Content-Type')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0')
+    meta(name='description', content='Programmer From Somewhere On Earth')
+    meta(property='og:description', content='Programmer From Somewhere On Earth')
+    meta(name='author', content='Your Username')
+    link(rel='stylesheet', type='text/css', href='http://localhost:3000/stylesheets/style.css')
+    link(href='//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css', rel='stylesheet')
+    link(href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic', rel='stylesheet', type='text/css')
+  body
+    .intro-header
+      .wrapper-masthead
+        .container
+          header.masthead.clearfix
+            .site-info
+              h1.site-name
+                a(href='/Jekyll-Mono/') Antonin Cezard
+              p.site-description JS developer
+            nav
+              a(href='/Jekyll-Mono/') Blog
+              a(href='/Jekyll-Mono/about') About
+              a(href='/Jekyll-Mono/projects') Projects
+      .container
+        .space-small
+        .centered
+          ul.ch-grid
+            li
+              .ch-item.ch-img-1
+                .ch-info-wrap
+                  .ch-info
+                    .ch-info-front.ch-img-1
+                    .ch-info-back
+                      h3 Antonin Cezard
+                      p
+                        br
+                        a(href='https://linkedin.com/in/akshay-agarwal-782018a4') View on LinkedIn
+        .space-medium
+    #main.container(role='main')
+      block content
+    .wrapper-footer
+      .container
+        footer.footer
+          .svg-icon
+            a(href='mailto:agarwal.akshay.akshay8@gmail.com')
+              i.icon-envelope.icon-2x
+            a(href='https://github.com/AkshayAgarwal007')
+              i.icon-github.icon-2x
+            a(href='https://www.linkedin.com/in/akshay-agarwal-782018a4')
+              i.icon-linkedin-sign.icon-2x
