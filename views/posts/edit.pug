@@ -1,0 +1,19 @@
+extends ../layout
+
+block content
+    h1.
+        post ID #{post._id}
+    form(action='/posts/#{post._id}/edit',method='post',name='updatepost',enctype='application/x-www-form-urlencoded')
+        p Name: 
+            input#inputName(type='text', value='#{post.title}', name='title')
+        p Badge: 
+            input#inputBadge(type='number', value='#{post.author}', name='author')
+        p Date: 
+            input#inputDob(type='date', value='#{date}', name='date')
+        p Body: 
+            input#inputName(type='text', value='#{post.body}', name='body')
+        p 
+            input(type='hidden',value='PUT',name='_method')
+        p 
+            button#btnSubmit(type='submit').
+                Update
