@@ -1,9 +1,17 @@
 extends ../layout
 
+block title
+  .container
+    .post-heading
+        h1 #{post.title}
+        span.meta
+        | Posted by 
+        a(href=`${post.author}`)
+            | #{post.author}
+        |  on #{date}
+
 block content
-    h1.
-        Infophoto #{post._id}
-    p Name: #{post.title}
-    p Badge: #{post.author}
-    p DOB: #{date}
-    p Is Loved: #{post.body}
+  article.post
+    .space-extra-small
+    p #{post.body}
+

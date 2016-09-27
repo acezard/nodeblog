@@ -3,6 +3,7 @@ const router = express.Router()
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
+const moment = require('moment')
 
 router.use(bodyParser.urlencoded({extended: true}))
 router.use(methodOverride((req) => {
@@ -13,9 +14,13 @@ router.use(methodOverride((req) => {
   }
 }))
 
+// GET all posts
 router.route('/').get((req, res) => {
   mongoose.model('Post').find({}, (err, posts) => {
     if (err) throw err
+
+    console.log(posts)
+
     res.format({
       html: () => res.render('posts/index', {title: 'All my posts', 'posts': posts}),
       json: () => res.json(posts)
@@ -23,18 +28,20 @@ router.route('/').get((req, res) => {
   })
 })
 
+
+// POST a new post
 router.route('/').post((req, res) => {
   const title = req.body.title
-  const author = req.body.author
+  const author = 'Antonin'
   const body = req.body.body
-  const date = req.body.date
+  const date = moment().format('MMM Do YY')
 
   mongoose.model('Post').create({
     title,
     author,
     body,
     date
-  }), (err, post) => {
+  }, (err, post) => {
     if (err) throw err
 
     res.format({
@@ -44,13 +51,15 @@ router.route('/').post((req, res) => {
       },
       json: () => res.json(post)
     })
-  }
+  })
 })
 
+// GET new post form
 router.get('/new', function(req, res) {
   res.render('posts/new', { title: 'Add a New Post' })
 })
 
+// CHECK Id
 router.param('id', (req, res, next, id) => {
   mongoose.model('Post').findById(id, (err) => {
     if (err) {
@@ -66,12 +75,13 @@ router.param('id', (req, res, next, id) => {
   })
 })
 
+// GET a single post
 router.route('/:id').get((req, res) => {
   mongoose.model('Post').findById(req.id, (err, post) => {
     if (err) throw err
 
     let date = post.date.toISOString()
-    date = date.substring(0, date.indexof('T'))
+    date = date.substring(0, date.indexOf('T'))
 
     res.format({
       html: () => res.render('posts/show', {
@@ -83,6 +93,7 @@ router.route('/:id').get((req, res) => {
   })
 })
 
+// GET a single post edit form
 router.get('/:id/edit', (req, res) => {
   mongoose.model('Post').findById(req.id, (err, post) => {
     if (err) throw err
@@ -101,11 +112,13 @@ router.get('/:id/edit', (req, res) => {
   })
 })
 
+
+// PUT a single post
 router.put('/:id/edit', (req, res) => {
   const title = req.body.title
-  const author = req.body.author
+  const author = 'Antonin'
   const body = req.body.body
-  const date = req.body.date
+  const date = Date.now()
 
   mongoose.model('Post').findById(req.id, (err, post) => {
     post.update({
@@ -124,7 +137,9 @@ router.put('/:id/edit', (req, res) => {
   })
 })
 
-router.delete('/:id/delete', (req, res) => {
+// DELETE a single post
+router.delete('/:id/edit', (req, res) => {
+  console.log('yes')
   mongoose.model('Post').findById(req.id, (err, post) => {
     if (err) throw err
 

@@ -1,21 +1,35 @@
 extends ../layout
 
+block title
+  .container
+    .space-small
+    .centered
+      ul.ch-grid
+        li
+          .ch-item.ch-img-1
+            .ch-info-wrap
+              .ch-info
+                .ch-info-front.ch-img-1
+                .ch-info-back
+                  h3 Antonin Cezard
+                  p
+                    br
+                    a(href='https://linkedin.com/in/akshay-agarwal-782018a4') View on LinkedIn
+    .space-medium
+
 block content
-  h1.
-    #{title}
-  ul
+  .posts
     each post, i in posts
-      li
-        = post.title
-        = post.author
-        = post.date
-        = post.body
-        = post._id
-        form(action='/posts/#{post._id}/edit',method='post',enctype='application/x-www-form-urlencoded')
-        input(type='hidden',value='DELETE',name='_method')
-        button(type='submit').
-          Delete
-        p 
-          a(href='/posts/#{post._id}/edit') Edit
-        p
-          a(href='/posts/#{post._id}') Show
+      article.post
+        h2 
+          a(href=`/posts/${post._id}`) #{post.title}
+        .entry
+          p #{post.author}, #{post.date}
+        a.button.button-primary(href=`/posts/${post._id}`) Read more
+
+        //form(action=`/posts/${post._id}/edit`,method='post',enctype='application/x-www-form-urlencoded')
+          input(type='hidden',value='DELETE',name='_method')
+          button(type='submit').
+            Delete
+        //p 
+          a(href=`/posts/${post._id}/edit`) Edit
