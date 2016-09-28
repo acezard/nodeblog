@@ -34,13 +34,11 @@ router.route('/').post((req, res) => {
   const title = req.body.title
   const author = 'Antonin'
   const body = req.body.body
-  const date = moment().format('MMM Do YY')
 
   mongoose.model('Post').create({
     title,
     author,
-    body,
-    date
+    body
   }, (err, post) => {
     if (err) throw err
 
@@ -80,12 +78,8 @@ router.route('/:id').get((req, res) => {
   mongoose.model('Post').findById(req.id, (err, post) => {
     if (err) throw err
 
-    let date = post.date.toISOString()
-    date = date.substring(0, date.indexOf('T'))
-
     res.format({
       html: () => res.render('posts/show', {
-        date,
         post
       }),
       json: () => res.json(post)
@@ -98,13 +92,9 @@ router.get('/:id/edit', (req, res) => {
   mongoose.model('Post').findById(req.id, (err, post) => {
     if (err) throw err
 
-    let date = post.date.toISOString()
-    date = date.substring(0, date.indexOf('T'))
-
     res.format({
       html: () => res.render('posts/edit', {
         title: `Post ${post._id}`,
-        date,
         post
       }),
       json: () => res.json(post)

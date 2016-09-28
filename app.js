@@ -1,3 +1,4 @@
+// App dependencies
 const express = require('express')
 const path = require('path')
 const favicon = require('serve-favicon')
@@ -5,14 +6,18 @@ const logger = require('morgan')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 
+// load db before routes
 const db = require('./model/db')
 const post = require('./model/posts')
 
+// Load routes
 const routes = require('./routes/index')
 const posts = require('./routes/posts')
 const users = require('./routes/users')
 
+// Init app
 const app = express()
+app.locals.moment = require('moment')
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))

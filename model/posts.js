@@ -1,8 +1,13 @@
 const mongoose = require('mongoose')
 
 const postSchema = new mongoose.Schema({
-  title: String,
-  author: String,
+  title: {
+    type: String,
+    uppercase: true
+  },
+  author: {
+    type: String
+  },
   body: String
 })
 

@@ -3,7 +3,7 @@ extends ../layout
 block content
     h1.
         #{title}
-    form#formAddpost(name="addpost",method="post",action="/posts")
+    form#formAddpost(name="addpost",method="post",action="/posts",enctype='application/x-www-form-urlencoded')
         p Title:
             input#inputName(type="text", name="title")
         p Body:

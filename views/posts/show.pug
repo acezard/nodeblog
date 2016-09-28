@@ -4,11 +4,13 @@ block title
   .container
     .post-heading
         h1 #{post.title}
-        span.meta
-        | Posted by 
-        a(href=`${post.author}`)
-            | #{post.author}
-        |  on #{date}
+        span.created-by
+          | Posted by 
+          a.post-author(href=`${post.author}`) #{post.author}
+          |, 
+        span.created-at
+          | 
+          | #{moment(post._id.getTimestamp()).format('MMM D')}
 
 block content
   article.post
