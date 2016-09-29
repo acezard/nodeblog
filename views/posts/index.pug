@@ -24,7 +24,7 @@ block content
         h2 
           a(href=`/posts/${post._id}`) #{post.title}
         .entry
-          p #{post.author}, #{post.date}
+          p #{post.author}, #{moment(post._id.getTimestamp()).format('MMM D')}
         a.button.button-primary(href=`/posts/${post._id}`) Read more
 
         //form(action=`/posts/${post._id}/edit`,method='post',enctype='application/x-www-form-urlencoded')

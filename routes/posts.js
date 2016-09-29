@@ -3,7 +3,11 @@ const router = express.Router()
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
-const moment = require('moment')
+const marked = require('marked')
+marked.setOptions({
+  sanitize: true
+})
+const sanitizeHtml = require('sanitize-html')
 
 router.use(bodyParser.urlencoded({extended: true}))
 router.use(methodOverride((req) => {
@@ -33,7 +37,7 @@ router.route('/').get((req, res) => {
 router.route('/').post((req, res) => {
   const title = req.body.title
   const author = 'Antonin'
-  const body = req.body.body
+  const body = sanitizeHtml(req.body.body)
 
   mongoose.model('Post').create({
     title,
@@ -77,6 +81,9 @@ router.param('id', (req, res, next, id) => {
 router.route('/:id').get((req, res) => {
   mongoose.model('Post').findById(req.id, (err, post) => {
     if (err) throw err
+    console.log(post.body[0])
+    post.body = marked(post.body)
+    console.log(post.body)
 
     res.format({
       html: () => res.render('posts/show', {

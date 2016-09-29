@@ -13,7 +13,4 @@ block title
           | #{moment(post._id.getTimestamp()).format('MMM D')}
 
 block content
-  article.post
-    .space-extra-small
-    p #{post.body}
-
+  article.post!= post.body

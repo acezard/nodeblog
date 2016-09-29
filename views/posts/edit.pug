@@ -7,7 +7,8 @@ block content
         p Title: 
             input#inputName(type='text', value=`${post.title}`, name='title')
         p Body: 
-            input#inputName(type='text', value=`${post.body}`, name='body')
+            textarea#inputName(type='text', name='body')
+              #{post.body}
         p 
             input(type='hidden',value='PUT',name='_method')
         p 

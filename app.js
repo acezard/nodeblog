@@ -13,7 +13,7 @@ const post = require('./model/posts')
 // Load routes
 const routes = require('./routes/index')
 const posts = require('./routes/posts')
-const users = require('./routes/users')
+const user = require('./routes/user')
 
 // Init app
 const app = express()
@@ -33,7 +33,7 @@ app.use(express.static('public'))
 
 app.use('/', routes)
 app.use('/posts', posts)
-app.use('/users', users)
+app.use('/user', user)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
